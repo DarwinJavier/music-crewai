@@ -49,6 +49,7 @@ source .venv/bin/activate
 pip install -e .
 ```
 ## Configure Environment Variables
+You will need your LLM  and Serper API Keys
 ```bash
 cp .env.example .env
 ```
