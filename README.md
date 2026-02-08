@@ -1,54 +1,80 @@
 # Music Crew
 
-Welcome to the Music Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+Generate deep, structured music genre reports (history, current scene, recommendations, and a 3–5 year outlook) using CrewAI — and optionally view the reports in a Gradio tabbed UI.
 
-## Installation
+<img src="assets/GradioReport.png" alt="Gradio UI demo" width="900">
 
-Ensure you have Python >=3.10 <3.14 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
 
-First, if you haven't already, install uv:
+## Features
 
-```bash
-pip install uv
-```
+- Generate long-form genre research reports from a single prompt
+- Covers:
+  - key history + turning points
+  - what’s happening now (artists, scenes, releases)
+  - recommendations (artists + starter tracks)
+  - 3–5 year outlook (signals + possible disruptors)
+- Writes multiple Markdown files per run into `output/<genre>/`
+- Optional Gradio UI (`--ui`) that renders each report in tabs
+- Includes a sample report in `example/dream-pop/`
 
-Next, navigate to your project directory and install the dependencies:
+## Prerequisites
+- Python 3.10+ (3.11 recommended)
 
-(Optional) Lock the dependencies and install them by using the CLI command:
-```bash
-crewai install
-```
-### Customizing
-
-**Add your `OPENAI_API_KEY` into the `.env` file**
-
-- Modify `src/music/config/agents.yaml` to define your agents
-- Modify `src/music/config/tasks.yaml` to define your tasks
-- Modify `src/music/crew.py` to add your own logic, tools and specific args
-- Modify `src/music/main.py` to add custom inputs for your agents and tasks
-
-## Running the Project
-
-To kickstart your crew of AI agents and begin task execution, run this from the root folder of your project:
+## Setup
+Clone the repo:
 
 ```bash
-$ crewai run
+git clone https://github.com/DarwinJavier/music-crewai.git
+cd music-crewai
 ```
 
-This command initializes the music Crew, assembling the agents and assigning them tasks as defined in your configuration.
+## Create a Virtual Environment
+```bash
+python -m venv .venv
+```
+### Windows:
+```bash
+.venv\Scripts\activate
+```
+### macOS/Linux:
+```bash
+source .venv/bin/activate
+```
+## Install Dependencies
+```bash
+pip install -e .
+```
+## Configure Environment Variables
+```bash
+cp .env.example .env
+```
+Then open .env and add your keys.
 
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
+## Run
 
-## Understanding Your Crew
+Generate reports for a genre:
+```bash
+python -m music.main --topic "Dream Pop"
+```
+Generate reports and launch the Gradio UI:
+```bash
+python -m music.main --topic "Dream Pop" --ui
+```
+## Output
 
-The music Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
+Each run creates a folder based on the topic slug and writes the Markdown files there:
 
-## Support
+output/dream-pop/
 
-For support, questions, or feedback regarding the Music Crew or crewAI.
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
+output/shoegaze/
 
-Let's create wonders together with the power and simplicity of crewAI.
+output/midwest-emo/
+
+## Example
+
+A sample output is available here:
+
+example/dream-pop/
+
+## License
+MIT
