@@ -32,9 +32,13 @@ cd music-crewai
 ```bash
 python -m venv .venv
 ```
-### Windows:
+### Windows (PowerShell):
 ```bash
-.venv\Scripts\activate
+.venv\Scripts\Activate.ps1
+```
+### Windows (cmd):
+```bash
+.venv\Scripts\activate.bat
 ```
 ### macOS/Linux:
 ```bash
