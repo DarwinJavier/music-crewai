@@ -1,0 +1,130 @@
+music_research_task:
+  description: >
+    Conduct a thorough research about {topic}.
+    Cover both historical context and what is happening right now: key bands, songs, albums, scenes,
+    movements, and turning points that shaped {topic}.
+    Then recommend current artists/releases/scenes connected to {topic} and explain why they fit.
+    Finally, give a 3 to 5 year outlook: what directions {topic} is likely to evolve toward, what signals
+    support that view, and what could disrupt it.
+  expected_output: >
+    A structured brief with:
+    1) 10 to 15 bullet points of the most relevant historical context about {topic}
+    2) 10 to 15 bullet points on current trends, key releases, and active scenes around {topic}
+    3) 8 to 12 current recommendations (artists + 1 to 2 starter tracks each) tied to {topic}
+    4) A 5 to 8 bullet outlook for {topic} over the next few years with clear reasoning
+  agent: music_researcher
+  output_file: "{output_dir}/music_research.md"
+
+indie_label_specialist_task:
+  description: >
+    Identify indie labels (global) that cover or have historically covered {topic} and explain how they
+    define the scene. For each label, highlight signature aesthetics, notable releases, and “sister” bands
+    in the roster that help map the ecosystem around {topic}.
+    Include discovery infrastructure: venues/festivals where these artists commonly play, how the labels
+    market (channels, communities, formats), and credible fanzines / scene blogs / social accounts that
+    consistently surface relevant music tied to {topic}.
+  expected_output: >
+    A scene map for {topic} including:
+    1) 8 to 12 indie labels (each with: location, sound/identity, 3 to 5 key artists, 3 key releases)
+    2) 10 to 20 additional artists to explore via those labels (with quick “why they matter” notes)
+    3) A list of venues/festivals/recurring nights commonly associated with the {topic} ecosystem
+    4) A list of fanzines/blogs/social accounts that reliably cover {topic}
+  agent: indie_label_specialist
+  output_file: "{output_dir}/indie_labels.md"
+
+dsp_playlist_editor_task:
+  description: >
+    Dissect how {topic} relates to adjacent songs, bands, scenes, and micro-genres, then build an ecosystem
+    of moods and feelings around it. Use a RateYourMusic-style approach: descriptors, influences, and other
+    metadata cues to create intelligent playlists that go beyond simple genre labels.
+    Create multiple mood-based playlists that act as “on-ramps” and “deep cuts” paths for {topic}, with
+    sequencing rationale (how each playlist flows and why the order works).
+  expected_output: >
+    A playlist programming pack for {topic} including:
+    1) A “descriptor map” (12 to 20 RYM-like descriptors + what they mean for {topic})
+    2) An adjacency map (nearby scenes/micro-genres + 2 to 3 bridge artists each)
+    3) 4 to 6 playlists (12 to 20 tracks each), each with a clear mood/theme title and 3 to 5 sentence sequencing rationale
+  agent: dsp_playlist_editor
+  output_file: "{output_dir}/playlists.md"
+
+radio_programmer_dj_task:
+  description: >
+    Explore the type of audience that {topic} appeals to and design a listening experience around it.
+    Define listener personas, their motivations, and what “hooks” them (familiarity, novelty, nostalgia,
+    intensity, vibe, lyrics, community identity).
+    Then propose a podcast-style or radio-style program concept built around {topic}: format, segments,
+    pacing, and a pilot episode plan that would resonate with the identified audience.
+  expected_output: >
+    A radio/podcast concept doc for {topic} including:
+    1) 2 to 4 audience personas (who they are, what they want, where they hang out, what they already like)
+    2) A show concept (title, premise, tone, segment structure, runtime, cadence)
+    3) A pilot episode outline (segment-by-segment) plus a suggested “set” (10 to 15 tracks) with short DJ notes
+    4) The value proposition of the show (what makes it unique and why it matters)
+    5) The distribution strategy for the show (how it will be promoted and how it will be distributed, including social media, streaming platforms, and other channels)
+  agent: radio_programmer_dj
+  output_file: "{output_dir}/radio_podcast_concept.md"
+
+critic_podcaster_task:
+  description: >
+    Write a short, vivid essay about {topic} that creates meaning and narrative—not just facts.
+    Use the research and scene/playlist/radio insights as inputs: historical context, labels, audience
+    dynamics, moods, and adjacent ecosystems around {topic}.
+    The essay should be specific, opinionated, and readable, with memorable framing and concrete entry points.
+  expected_output: >
+    A polished essay about {topic} (300 to 500 words) that includes:
+    1) A strong opening hook + thesis on what {topic} “is really about”
+    2) Historical lineage + key moments (without turning into a textbook)
+    3) A “start here” section (5 essential tracks/albums with 1 to 2 sentences each)
+    4) A “go deeper” section (5 deeper cuts + why they reward attention)
+    5) A closing that connects {topic} to culture and what it signals next
+  agent: critic_podcaster
+  context:
+    - music_research_task
+    - indie_label_specialist_task
+    - dsp_playlist_editor_task
+    - radio_programmer_dj_task
+  output_file: "{output_dir}/essay.md"
+
+music_analytics_intel_task:
+  description: >
+    Track and interpret consumption + sentiment signals across major platforms (monthly listeners,
+    chart movement, playlist velocity, saves/skip proxies, ratings/reviews) to identify momentum,
+    stagnation, and breakout potential related to {topic}.
+  expected_output: >
+    A JSON summary containing:
+    1) Monthly listeners
+    2) Chart movement
+    3) Playlist velocity
+    4) Saves/skip proxies
+    5) Ratings/reviews
+  agent: music_analytics_intel
+  output_file: "{output_dir}/music_analytics_intel_report.md"
+
+music_strategy_compiler_task:
+  description: >
+    Analyze and synthesize all findings into a cohesive, decision-grade report about {topic}.
+    Integrate: context and lineage, scenes, key bands and songs, audiences, indie labels, content strategy,
+    playlists with descriptor logic, and the critic essay viewpoint.
+    Provide analysis of patterns and trends (what is rising, what is fading, what is cyclical) and a forward
+    outlook for how {topic} may evolve, including risks and uncertainty.
+    Format the report professionally with clear headings and a strong executive summary.
+  expected_output: >
+    A polished, professional report on {topic} that includes:
+    1) Executive summary
+    2) Historical context + lineage (key scenes, bands, releases)
+    3) Current landscape (active artists, hotspots, adjacent ecosystems)
+    4) Indie label + community infrastructure (labels, venues, media/fanzines, social nodes)
+    5) Audience and positioning (personas, listening triggers, cultural narrative)
+    6) Content strategy ideas (radio/podcast concept summary + distribution angles)
+    7) Playlist appendix (mood playlists + descriptor map)
+    8) Short essay appendix (final essay)
+    9) Outlook for {topic} over the next few years (note: not a guarantee; highlight uncertainty)
+  agent: music_strategy_compiler
+  context:
+    - music_research_task
+    - indie_label_specialist_task
+    - dsp_playlist_editor_task
+    - radio_programmer_dj_task
+    - critic_podcaster_task
+    - music_analytics_intel_task
+  output_file: "{output_dir}/report.md" 
