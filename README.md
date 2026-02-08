@@ -57,8 +57,8 @@ Then open .env and add your keys.
 
 ## Run
 
+### Use the CLI below and substitute "Dream Pop" with the genre you'd like to research about
 Generate reports for a genre:
-###Use the CLI below and substitute "Dream Pop" with the genre you'd like to research about
 
 ```bash
 python -m music.main --topic "Dream Pop"
